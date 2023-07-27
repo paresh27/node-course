@@ -1,3 +1,7 @@
 const firstName = "Paresh";
 
-module.exports = firstName;
+const add = function (a, b) {
+  return a + b;
+};
+
+module.exports = add;
