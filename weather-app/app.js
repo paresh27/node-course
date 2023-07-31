@@ -18,18 +18,22 @@ yargs.command({
 });
 
 const getWeatherForecast = (location) => {
-  geocode(location, (error, data) => {
+  geocode(location, (error, { latitude, longitude, location } = {}) => {
     if (error) {
       return console.log(error);
     }
-    forecast(data.latitude, data.longitude, (error, response) => {
-      if (error) {
-        return console.log(error);
+    forecast(
+      latitude,
+      longitude,
+      (error, { description, temperature, rain } = {}) => {
+        if (error) {
+          return console.log(error);
+        }
+        console.log(
+          `${description} in ${location}. It is currently ${temperature} degrees out. There is ${rain}% chance of rain.`
+        );
       }
-      console.log(
-        `${response.description} in ${data.location}. It is currently ${response.temperature} degrees out. There is ${response.rain}% chance of rain.`
-      );
-    });
+    );
   });
 };
 yargs.parse();
