@@ -9,7 +9,29 @@ const publicDirectoryPath = path.join(__dirname, "../public");
 
 const app = express();
 
+app.set("view engine", "hbs");
 app.use(express.static(publicDirectoryPath));
+
+app.get("", (req, res) => {
+  res.render("index", {
+    title: "Weather App",
+    name: "Paresh",
+  });
+});
+
+app.get("/about", (req, res) => {
+  res.render("about", {
+    title: "About",
+    name: "Paresh",
+  });
+});
+
+app.get("/help", (req, res) => {
+  res.render("help", {
+    title: "help",
+    name: "Paresh",
+  });
+});
 
 app.get("/weather", (req, res) => {
   res.send({
