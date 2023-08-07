@@ -8,7 +8,7 @@ const weatherForm = document.querySelector("form");
 const search = document.querySelector("input");
 var messageOne = document.querySelector("#message-1");
 var messageTwo = document.querySelector("#message-2");
-const baseURL = "http://127.0.0.1:3000/weather?address=";
+const baseURL = "https://maheshwari-weather-app.onrender.com//weather?address=";
 weatherForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const location = search.value;
