@@ -10,7 +10,6 @@
     <section class="main-content">
         <h1>Chat Application</h1>
         <div id="messages"></div>
-        <div id="locations"></div>
         <form method="post" id="chat-form">
             <input type="text" name="message" placeholder="Type your message here ..">
             <button>send</button>
@@ -20,7 +19,7 @@
     
     <script id="message-template" type="text/html">
         <div>
-            <p>{{message}}</p>
+            <p>{{ createdAt }} - {{message}}</p>
         </div>
     </script>
     

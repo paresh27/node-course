@@ -8,17 +8,21 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
+const { generateMessage } = require("./utils/messages");
+
 const port = process.env.PORT || 3000;
 
 const publicDirectoryPath = path.join(__dirname, "../public");
 
 app.use(express.static(publicDirectoryPath));
 
-let message = "Welcome!";
 io.on("connection", (socket) => {
-  socket.emit("welcomeMessage", message);
+  socket.emit("welcomeMessage", generateMessage("Welcome!"));
 
-  socket.broadcast.emit("welcomeMessage", "A new user has joined!");
+  socket.broadcast.emit(
+    "welcomeMessage",
+    generateMessage("A new user has joined!")
+  );
 
   socket.on("sendMessage", (message, callback) => {
     const filter = new Filter();
@@ -27,13 +31,13 @@ io.on("connection", (socket) => {
       return callback("Profanity is not allowed.");
     }
 
-    io.emit("welcomeMessage", message);
+    io.emit("welcomeMessage", generateMessage(message));
 
     callback();
   });
 
   socket.on("disconnect", () => {
-    io.emit("welcomeMessage", "A user had left!");
+    io.emit("welcomeMessage", generateMessage("A user had left!"));
   });
 
   socket.on("sendLocation", ({ latitude, longitude }, callback) => {
