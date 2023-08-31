@@ -3,29 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/styles.min.css">
+    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
     <title>Chat Application</title>
 </head>
 <body>
-    <section class="main-content">
-        <h1>Chat Application</h1>
-        <div id="messages"></div>
-        <form method="post" id="chat-form">
-            <input type="text" name="message" placeholder="Type your message here ..">
-            <button>send</button>
-        </form>
-        <button id="send-location">Send Location</button>
-    </section>
+    <div class="chat">
+        <div class="chat__sidebar"></div>
+        <div class="chat__main">
+            <div id="messages" class="chat__messages"></div>
+            <div class="compose">
+                <form method="post" id="chat-form">
+                    <input type="text" name="message" placeholder="Type your message here ..">
+                    <button>send</button>
+                </form>
+                <button id="send-location">Send Location</button>
+            </div>
+        </div>
+    </div>
     
     <script id="message-template" type="text/html">
-        <div>
-            <p>{{ createdAt }} - {{message}}</p>
+        <div class="message">
+            <p>
+                <span class="message__name">Some user name</span>
+                <span class="message__meta">{{ createdAt }}</span>
+            </p>
+            <p>{{message}}</p>
         </div>
     </script>
     
     <script id="location-template" type="text/html">
-        <div>
-           <p><a href="{{ url }}" target="_blank">My current location.</a></p>
+        <div class="message">
+            <p>
+                <span class="message__name">Some user name</span>
+                <span class="message__meta">{{ createdAt }}</span>
+            </p>
+            <p> <a href="{{ url }}" target="_blank">My current location.</a></p>
         </div>
     </script>
     
